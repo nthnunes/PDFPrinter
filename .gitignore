@@ -3,4 +3,4 @@
 *.pdf
 *.pdf
 *.docx
-*.pyc
+/src/build

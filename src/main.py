@@ -1,6 +1,6 @@
 import os
 from pdf import *
-from utils import viewLog, convert2docx
+from utils import viewLog, convert2docx, log
 
 while True:
     print("MENU: \n1 - Gerar Documento\n2 - Editar Documento no Word\n3 - Visualizar Documento\n4 - Salvar Documento\n5 - Exibir Logs")
@@ -28,12 +28,23 @@ while True:
     elif opc == 2:
         print("\n")
         convert2docx("document.pdf", "document.docx")
+        try:
+            os.startfile("document.docx")
+        except Exception as e:
+            print("-> Houve um problema ao abrir o documento no Word.")
+            log(e)
 
     elif opc == 3:
-        os.startfile("document.pdf")
+        try:
+            os.startfile("document.pdf")
+        except Exception as e:
+            print("-> Houve um problema ao abrir o documento.")
+            log(e)
 
     elif opc == 4:
-        pass
+        print("\n")
+        convert2docx("document.pdf", "document.docx")
+        filename = os.path.join(os.environ["HOMEDRIVE"], os.environ["HOMEPATH"], "Desktop", "test.csv")
 
     elif opc == 5:
         viewLog()
