@@ -42,7 +42,7 @@ def number2words(number_p):
 
         return result
     except Exception as e:
-        print("-> sHouve um problema ao gerar o documento.")
+        print("-> Houve um problema ao gerar o documento.")
         log(e)
 
 def convert2docx(input_file: str, output_file: str, pages: Tuple = None):
@@ -54,7 +54,7 @@ def convert2docx(input_file: str, output_file: str, pages: Tuple = None):
         summary = {
             "File": input_file, "Pages": str(pages), "Output File": output_file
         }
-
+        print("")
         print("\n".join("{}:{}".format(i, j) for i, j in summary.items()))
     except Exception as e:
         print("-> Houve um problema ao converter o documento.")
