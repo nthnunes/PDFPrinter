@@ -14,7 +14,7 @@ options = {
 }
 
 setup(
-    name = "Manaju Doc Generator",
+    name = "Manaju Docs",
     options = options,
     version = "1.0",
     description = 'None',
