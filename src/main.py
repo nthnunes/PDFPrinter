@@ -26,20 +26,25 @@ while True:
         newPDF(nome, rg, emissor, cpf, dataIn, dataOut, evento, valor, dataAss)
 
     elif opc == 2:
-        print("\n")
-        convert2docx("document.pdf", "document.docx")
-        try:
-            os.startfile("document.docx")
-        except Exception as e:
-            print("-> Houve um problema ao abrir o documento no Word.")
-            log(e)
+        if os.path.exists('./document.pdf'):
+            convert2docx("document.pdf", "document.docx")
+            try:
+                os.startfile("document.docx")
+            except Exception as e:
+                print("-> Houve um problema ao abrir o documento no Word.")
+                log(e)
+        else:
+            print("-> Você deve gerar um documento para poder editá-lo.")
 
     elif opc == 3:
-        try:
-            os.startfile("document.pdf")
-        except Exception as e:
-            print("-> Houve um problema ao abrir o documento.")
-            log(e)
+        if os.path.exists('./document.pdf'):
+            try:
+                os.startfile("document.pdf")
+            except Exception as e:
+                print("-> Houve um problema ao abrir o documento.")
+                log(e)
+        else:
+            print("-> Você deve gerar um documento para poder visualiza-lo.")
 
     elif opc == 4:
         viewLog()
