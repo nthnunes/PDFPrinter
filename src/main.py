@@ -3,7 +3,7 @@ from pdf import *
 from utils import viewLog, convert2docx, log
 
 while True:
-    print("MENU: \n1 - Gerar Documento\n2 - Editar Documento no Word\n3 - Visualizar Documento\n4 - Salvar Documento\n5 - Exibir Logs")
+    print("MENU: \n1 - Gerar Documento\n2 - Editar Documento no Word\n3 - Visualizar Documento\n4 - Exibir Logs")
     while True:
         try:
             opc = int(input("Digite a opção desejada: "))
@@ -42,11 +42,6 @@ while True:
             log(e)
 
     elif opc == 4:
-        print("\n")
-        convert2docx("document.pdf", "document.docx")
-        filename = os.path.join(os.environ["HOMEDRIVE"], os.environ["HOMEPATH"], "Desktop", "test.csv")
-
-    elif opc == 5:
         viewLog()
 
     else:
