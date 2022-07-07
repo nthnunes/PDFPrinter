@@ -44,7 +44,7 @@ while True:
                 print("-> Houve um problema ao abrir o documento.")
                 log(e)
         else:
-            print("-> Você deve gerar um documento para poder visualiza-lo.")
+            print("-> Você deve gerar um documento para poder visualizá-lo.")
 
     elif opc == 4:
         viewLog()
