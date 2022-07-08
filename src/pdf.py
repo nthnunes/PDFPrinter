@@ -1,5 +1,5 @@
 from fpdf import FPDF
-from utils import number2words, log
+from utils import number2words, counter, log
 
 def newPDF(nome, rg, emissor, cpf, dataIn, dataOut, evento, valor, dataAss) -> None:
     try:
@@ -123,8 +123,8 @@ def newPDF(nome, rg, emissor, cpf, dataIn, dataOut, evento, valor, dataAss) -> N
 
         text = ("Ibaiti, " + dataAss + ".")
         pdf.multi_cell(0, 6, txt = text, border = 0, align = "R", fill = False)
-
-        pdf.output("document.pdf")
+        
+        pdf.output(("document" + str(counter()) + ".pdf"))
         print("-> Documento gerado com sucesso!")
     except Exception as e:
         log(e)
