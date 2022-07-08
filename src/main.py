@@ -31,7 +31,7 @@ while True:
             print("\n1 - Editar último documento\n2 - Editar documentos anteriores")
             try:
                 opc = int(input("Opção: "))
-            except Exception as e:
+            except ValueError:
                 print("Valor inválido.")
             
             if opc == 1:
@@ -80,7 +80,7 @@ while True:
             print("\n1 - Visualizar último documento\n2 - Visualizar documentos anteriores")
             try:
                 opc = int(input("Opção: "))
-            except Exception as e:
+            except ValueError:
                 print("Opção inválida.")
             
             if opc == 1:
