@@ -79,3 +79,48 @@ def viewLog() -> None:
         data.close()
     else:
         print("Empty Log")
+
+def counter() -> int:
+    try:
+        if os.path.exists('./data.dat') == False:
+            data = open("data.dat", "w")
+            data.write("1")
+            data.close()
+            return 1
+        else:
+            data = open("data.dat", "r")
+            count = data.readline()
+            data.close()
+
+            data = open("data.dat", "w")
+            data.write(str(int(count)+1))
+            data.close()
+            return int(count) + 1
+    except Exception as e:
+        log(e)
+    
+def viewCounter() -> int:
+    if os.path.exists('./data.dat'):
+        data = open("data.dat", "r")
+        count = data.readline()
+        data.close()
+        return int(count)
+    else:
+        return 0
+
+def deleteAll() -> None:
+    try:
+        if os.path.exists('./data.dat'):
+            for i in range(viewCounter()):
+                i = str(i + 1)
+                if os.path.exists("document" + i + ".pdf"):
+                    os.remove("document" + i + ".pdf")
+                if os.path.exists("document" + i + ".docx"):
+                    os.remove("document" + i + ".docx")
+            os.remove("data.dat")
+            print("Documentos apagados com sucesso!")
+        else:
+            print("Não há documentos para serem removidos.")
+    except Exception as e:
+        print("-> Houve um problema ao deletar os arquivos.")
+        log(e)
