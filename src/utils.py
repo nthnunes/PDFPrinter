@@ -122,5 +122,12 @@ def deleteAll() -> None:
         else:
             print("Não há documentos para serem removidos.")
     except Exception as e:
-        print("-> Houve um problema ao deletar os arquivos.")
+        error = str(e)
+        aux = ""
+        for i in range(0, 63):
+            aux = (aux + error[i])
+        if aux == "[WinError 32] O arquivo já está sendo usado por outro processo:":
+            print("-> Feche o Word para apagar os arquivos.")
+        else:
+            print("-> Houve um problema ao deletar os arquivos.")
         log(e)
