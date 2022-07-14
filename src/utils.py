@@ -84,9 +84,9 @@ def counter() -> int:
     try:
         if os.path.exists('./data.dat') == False:
             data = open("data.dat", "w")
-            data.write("1")
+            data.write("1000")
             data.close()
-            return 1
+            return 1000
         else:
             data = open("data.dat", "r")
             count = data.readline()
@@ -109,25 +109,11 @@ def viewCounter() -> int:
         return 0
 
 def deleteAll() -> None:
-    try:
-        if os.path.exists('./data.dat'):
-            for i in range(viewCounter()):
-                i = str(i + 1)
-                if os.path.exists("document" + i + ".pdf"):
-                    os.remove("document" + i + ".pdf")
-                if os.path.exists("document" + i + ".docx"):
-                    os.remove("document" + i + ".docx")
-            os.remove("data.dat")
-            print("Documentos apagados com sucesso!")
-        else:
-            print("Não há documentos para serem removidos.")
-    except Exception as e:
-        error = str(e)
-        aux = ""
-        for i in range(0, 63):
-            aux = (aux + error[i])
-        if aux == "[WinError 32] O arquivo já está sendo usado por outro processo:":
-            print("-> Feche o Word para apagar os arquivos.")
-        else:
-            print("-> Houve um problema ao deletar os arquivos.")
-        log(e)
+    if os.path.exists('./data.dat'):
+        for file in os.scandir():
+            if file.path[-3:] == "pdf" or file.path[-4:] == "docx":
+                os.remove(file.path)
+        os.remove("data.dat")
+        print("-> Documentos apagados com sucesso!")
+    else:
+        print("-> Não há documentos para serem removidos.")
