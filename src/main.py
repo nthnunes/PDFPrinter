@@ -35,43 +35,47 @@ while True:
                 print("Valor inválido.")
             
             if opc == 1:
-                pdf = ("document" + str(viewCounter()) + ".pdf")
-                docx = ("document" + str(viewCounter()) + ".docx")
+                for i in range(len(os.listdir())):
+                    aux = os.listdir()[i]
 
-                convert2docx(pdf, docx)
-                try:
-                    os.startfile(docx)
-                except Exception as e:
-                    print("-> Houve um problema ao abrir o documento no Word.")
-                    log(e)
+                    if aux[:4] == str(viewCounter()) and aux[-3:] == "pdf":
+                        docx = (aux[:-4] + ".docx")
+                        convert2docx(aux, docx)
+                        try:
+                            os.startfile(docx)
+                        except Exception as e:
+                            print("-> Houve um problema ao abrir o documento no Word.")
+                            log(e)
             
             if opc == 2:
-                aux = 0
                 print("")
-                for i in range(viewCounter()):
-                    i = str(i + 1)
-                    if os.path.exists("document" + i + ".pdf"):
-                        print(i + " - Documento " + i + " - " + str(datetime.datetime.fromtimestamp(os.path.getctime("document" + i + ".pdf"))))
-                        aux = aux + 1
-                if(aux != 0):
-                    try:
-                        opc = int(input("Digite o arquivo que deseja editar: "))
+                for i in range(len(os.listdir())):
+                    aux = os.listdir()[i]
+                    auy = (aux[-3:])
+                    if auy == "pdf":
+                        print(aux[:-4] + " - " +
+                                str((datetime.datetime.fromtimestamp(os.path.getctime(os.listdir()[i])).strftime('%d/%m/%Y %H:%M'))))
 
-                        if opc <= viewCounter():
-                            pdf = ("document" + str(opc) + ".pdf")
-                            docx = ("document" + str(opc) + ".docx")
+                if(aux != 0):
+                    opc = input("Digite o número do arquivo que deseja editar: ")
+                    
+                    docx = None
+                    for i in range(len(os.listdir())):
+                        aux = os.listdir()[i]
+                        if opc == aux[:4] and aux[-3:] == "pdf":
+                            docx = (aux[:-4] + ".docx")
 
                             print("")
-                            convert2docx(pdf, docx)
+                            convert2docx(aux, docx)
                             try:
                                 os.startfile(docx)
                             except Exception as e:
                                 print("-> Houve um problema ao abrir o documento no Word.")
                                 log(e)
-                        else:
-                            print("Arquivo inexistente.")
-                    except Exception as e:
-                        print("Valor inválido.")
+                            break
+
+                    if docx == None:
+                        print("Arquivo inexistente.")
         else:
             print("Você precisa gerar um arquivo antes de poder editá-lo.")
 
@@ -84,38 +88,42 @@ while True:
                 print("Opção inválida.")
             
             if opc == 1:
-                pdf = ("document" + str(viewCounter()) + ".pdf")
+                for i in range(len(os.listdir())):
+                    aux = os.listdir()[i]
 
-                try:
-                    os.startfile(pdf)
-                except Exception as e:
-                    print("-> Houve um problema ao abrir o documento.")
-                    log(e)
+                    if aux[:4] == str(viewCounter()) and aux[-3:] == "pdf":
+                        try:
+                            os.startfile(aux)
+                        except Exception as e:
+                            print("-> Houve um problema ao abrir o documento.")
+                            log(e)
             
-            if opc == 2:   
-                aux = 0
+            if opc == 2:
                 print("")
-                for i in range(viewCounter()):
-                    i = str(i + 1)
-                    if os.path.exists("document" + i + ".pdf"):
-                        print(i + " - Documento " + i + " - " + str(datetime.datetime.fromtimestamp(os.path.getctime("document" + i + ".pdf"))))
-                        aux = aux + 1
+                for i in range(len(os.listdir())):
+                    aux = os.listdir()[i]
+                    auy = (aux[-3:])
+                    if auy == "pdf":
+                        print(aux[:-4] + " - " +
+                                str((datetime.datetime.fromtimestamp(os.path.getctime(os.listdir()[i])).strftime('%d/%m/%Y %H:%M'))))
+                        
                 if(aux != 0):
-                    try:
-                        opc = int(input("Digite o arquivo que deseja visualizar: "))
-
-                        if opc <= viewCounter():
-                            pdf = ("document" + str(opc) + ".pdf")
+                    opc = input("Digite o número do arquivo que deseja visualizar: ")
+                    
+                    cont = 0
+                    for i in range(len(os.listdir())):
+                        aux = os.listdir()[i]
+                        if opc == aux[:4] and aux[-3:] == "pdf":
+                            cont = 1
 
                             try:
-                                os.startfile(pdf)
+                                os.startfile(aux)
                             except Exception as e:
                                 print("-> Houve um problema ao abrir o documento.")
                                 log(e)
-                        else:
-                            print("Arquivo inexistente.")
-                    except Exception as e:
-                        print("Valor inválido.")
+                            break
+                    if cont != 1:
+                        print("Arquivo inexistente.")
         else:
             print("Você precisa gerar um arquivo antes de poder visualizá-lo.")
 
