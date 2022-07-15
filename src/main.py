@@ -47,7 +47,7 @@ while True:
                             print("-> Houve um problema ao abrir o documento no Word.")
                             log(e)
             
-            if opc == 2:
+            elif opc == 2:
                 print("")
                 for i in range(len(os.listdir())):
                     aux = os.listdir()[i]
@@ -76,6 +76,8 @@ while True:
 
                     if docx == None:
                         print("Arquivo inexistente.")
+            else:
+                print("Opção Inválida.")
         else:
             print("Você precisa gerar um arquivo antes de poder editá-lo.")
 
@@ -98,7 +100,7 @@ while True:
                             print("-> Houve um problema ao abrir o documento.")
                             log(e)
             
-            if opc == 2:
+            elif opc == 2:
                 print("")
                 for i in range(len(os.listdir())):
                     aux = os.listdir()[i]
@@ -124,6 +126,8 @@ while True:
                             break
                     if cont != 1:
                         print("Arquivo inexistente.")
+            else:
+                print("Opção inválida.")
         else:
             print("Você precisa gerar um arquivo antes de poder visualizá-lo.")
 
