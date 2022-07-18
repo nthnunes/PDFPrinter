@@ -10,7 +10,7 @@ while True:
             opc = int(input("Digite a opção desejada: "))
             break
         except ValueError:
-            print("Valor inválido, tente novamente!")
+            print("-> Valor inválido, tente novamente!\n")
 
     if opc == 1:
         print("\n-> Dados do contrato")
@@ -20,11 +20,17 @@ while True:
         cpf = input("CPF: ")
         dataIn = input("Data de Entrada: ")
         dataOut = input("Data de Saída (se saída for no mesmo dia digite 0): ")
+        dataAss = input("Data para Assinatura: ")
         evento = input("Nome do Evento: ")
         valor = input("Valor do Aluguel: ")
-        dataAss = input("Data para Assinatura: ")
+        while True:
+            aux = int(input("\n1 - À vista\n2 - A prazo\nPagamento: "))
+            if aux == 1 or aux == 2:
+                break
+            else:
+                print("-> Valor inválido.")
 
-        newPDF(nome, rg, emissor, cpf, dataIn, dataOut, evento, valor, dataAss)
+        newPDF(nome, rg, emissor, cpf, dataIn, dataOut, dataAss, evento, valor, aux)
 
     elif opc == 2:
         if viewCounter() != 0:
@@ -32,7 +38,7 @@ while True:
             try:
                 opc = int(input("Opção: "))
             except ValueError:
-                print("Valor inválido.")
+                print("-> Valor inválido.")
             
             if opc == 1:
                 for i in range(len(os.listdir())):
@@ -135,9 +141,11 @@ while True:
         viewLog()
 
     elif opc == 5:
-        opc = input("Tem certeza que deseja deletar todos os documentos? [sim/cancelar]\n")
+        opc = input("Tem certeza que deseja deletar todos os documentos?\n[sim/cancelar]: ")
         if opc.lower() == "sim":
             deleteAll()
+        else:
+            print("-> Cancelado.")
 
     else:
         print("Opção inválida, tente novamente!")
