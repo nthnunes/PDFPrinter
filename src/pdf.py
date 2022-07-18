@@ -1,7 +1,7 @@
 from fpdf import FPDF
 from utils import number2words, counter, log
 
-def newPDF(nome, rg, emissor, cpf, dataIn, dataOut, evento, valor, dataAss) -> None:
+def newPDF(nome, rg, emissor, cpf, dataIn, dataOut, dataAss, evento, valor, pag) -> None:
     try:
         pdf = FPDF(format = 'A4')  
         pdf.add_page()
@@ -49,7 +49,10 @@ def newPDF(nome, rg, emissor, cpf, dataIn, dataOut, evento, valor, dataAss) -> N
         pdf.multi_cell(0, 6, txt = text, border = 0, align = "J", fill = False)
         pdf.ln(h = '')
 
-        text = ("             CLAUSULA SEGUNDA: O valor da locação será de " + valor + " (" + number2words(valor) + ") a ser pago da seguinte maneira: por transferência via pix para a chave \"043991113108\" no ato da assinatura do contrato.")
+        if pag == 1:
+            text = ("             CLAUSULA SEGUNDA: O valor da locação será de " + valor + " (" + number2words(valor) + ") a ser pago da seguinte maneira: por transferência via pix para a chave \"043991113108\" no ato da assinatura do contrato.")
+        else:
+            text = ("             CLAUSULA SEGUNDA: O valor da locação será de " + valor + " (" + number2words(valor) + ") a ser pago da seguinte maneira: por transferência via pix para a chave \"043991113108\" no ato da assinatura do contrato.")
         pdf.multi_cell(0, 6, txt = text, border = 0, align = "J", fill = False)
         pdf.ln(h = '')
 
