@@ -62,8 +62,7 @@ def convert2docx(input_file: str, output_file: str, pages: Tuple = None):
 
 def log(error) -> None:
     data = open("logger.log", "a")
-    time = datetime.now()
-    data.write(str(time))
+    data.write(str((datetime.now().strftime('%d/%m/%Y %H:%M:%S'))))
     data.write(" -> ")
     data.write(str(error))
     data.write("\n")
