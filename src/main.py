@@ -24,13 +24,15 @@ while True:
         evento = input("Nome do Evento: ")
         valor = input("Valor do Aluguel: ")
         while True:
-            aux = int(input("\n1 - À vista\n2 - A prazo\nPagamento: "))
-            if aux == 1 or aux == 2:
-                break
-            else:
-                print("-> Valor inválido.")
-
-        newPDF(nome, rg, emissor, cpf, dataIn, dataOut, dataAss, evento, valor, aux)
+            try:
+                pag = int(input("\n1 - À vista\n2 - A prazo\nOpção de Pagamento: "))
+                if pag == 1 or pag == 2:
+                    break
+                else:
+                    print("-> Opção inválida.")
+            except ValueError:
+                print("-> Valor inválido, tente novamente!")
+        newPDF(nome, rg, emissor, cpf, dataIn, dataOut, dataAss, evento, valor, pag)
 
     elif opc == 2:
         if viewCounter() != 0:
@@ -46,9 +48,12 @@ while True:
 
                     if aux[:4] == str(viewCounter()) and aux[-3:] == "pdf":
                         docx = (aux[:-4] + ".docx")
+                        print("")
                         convert2docx(aux, docx)
+                        print("")
                         try:
                             os.startfile(docx)
+                            break
                         except Exception as e:
                             print("-> Houve um problema ao abrir o documento no Word.")
                             log(e)
@@ -73,19 +78,21 @@ while True:
 
                             print("")
                             convert2docx(aux, docx)
+                            print("")
                             try:
                                 os.startfile(docx)
+                                break
                             except Exception as e:
                                 print("-> Houve um problema ao abrir o documento no Word.")
                                 log(e)
                             break
 
                     if docx == None:
-                        print("Arquivo inexistente.")
+                        print("-> Arquivo inexistente.")
             else:
-                print("Opção Inválida.")
+                print("-> Opção Inválida.")
         else:
-            print("Você precisa gerar um arquivo antes de poder editá-lo.")
+            print("-> Você precisa gerar um arquivo antes de poder editá-lo.")
 
     elif opc == 3:
         if viewCounter() != 0:
@@ -93,7 +100,7 @@ while True:
             try:
                 opc = int(input("Opção: "))
             except ValueError:
-                print("Opção inválida.")
+                print("-> Opção inválida.")
             
             if opc == 1:
                 for i in range(len(os.listdir())):
@@ -131,11 +138,11 @@ while True:
                                 log(e)
                             break
                     if cont != 1:
-                        print("Arquivo inexistente.")
+                        print("-> Arquivo inexistente.")
             else:
-                print("Opção inválida.")
+                print("-> Opção inválida.")
         else:
-            print("Você precisa gerar um arquivo antes de poder visualizá-lo.")
+            print("-> Você precisa gerar um arquivo antes de poder visualizá-lo.")
 
     elif opc == 4:
         viewLog()
@@ -148,6 +155,6 @@ while True:
             print("-> Cancelado.")
 
     else:
-        print("Opção inválida, tente novamente!")
+        print("-> Opção inválida, tente novamente!")
 
     print("")
