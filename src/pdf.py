@@ -39,7 +39,7 @@ def newPDF(nome, rg, emissor, cpf, dataIn, dataOut, dataAss, evento, valor, pag)
         pdf.ln(h = '')
 
         if dataOut == "0":
-            text = ("           Parágrafo III: O(A) LOCATÁRIO(A) fica ciente, da utilização das dependências do Sítio Manaju no horário estipulado das 8h do dia " + dataIn + " até às 21h do mesmo dia e se compromete a entregar as chaves das dependências devidamente fechada, no horário estipulado, ao(à) LOCADOR(A).")
+            text = ("           Parágrafo III: O(A) LOCATÁRIO(A) fica ciente, da utilização das dependências do Sítio Manaju no horário estipulado das 8h no dia " + dataIn + " até às 21h do mesmo dia e se compromete a entregar as chaves das dependências devidamente fechada, no horário estipulado, ao(à) LOCADOR(A).")
         else:
             text = ("           Parágrafo III: O(A) LOCATÁRIO(A) fica ciente, da utilização das dependências do Sítio Manaju no horário estipulado das 8h do dia " + dataIn + " até às 21h do dia " + dataOut + " e se compromete a entregar as chaves das dependências devidamente fechada, no horário estipulado, ao(à) LOCADOR(A).")
         pdf.multi_cell(0, 6, txt = text, border = 0, align = "J", fill = False)
